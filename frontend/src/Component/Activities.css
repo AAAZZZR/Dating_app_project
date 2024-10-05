@@ -1,0 +1,102 @@
+.activities-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .activities-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .activity-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-height: 500px; 
+    display: flex;
+    flex-direction: column;
+}
+.participants-list {
+  margin-top: 10px;
+  max-height: 80px; /* 设置参与者列表的最大高度 */
+  overflow-y: auto;  /* 当内容超出时启用垂直滚动 */
+}
+
+.participants-list ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+  .activity-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .activity-details p {
+    margin: 5px 0;
+  }
+  
+  .join-button, .create-activity-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .join-button:hover, .create-activity-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .create-activity-button {
+    margin-bottom: 20px;
+  }
+  
+  .create-activity-form {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .create-activity-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .create-activity-form button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .create-activity-form button[type="button"] {
+    background-color: #dc3545;
+  }
+  
+  .create-activity-form button:hover {
+    opacity: 0.8;
+  }

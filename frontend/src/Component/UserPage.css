@@ -1,0 +1,158 @@
+/* UserPage 样式 */
+
+.user-info {
+    margin-bottom: 20px;
+    padding: 16px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-info h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #343a40;
+}
+
+.user-info p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+/* 为容纳左右列的容器 */
+.activity-columns {
+    display: flex;            /* 使用 flexbox 布局 */
+    justify-content: space-between; /* 让左右列有间隔 */
+    gap: 20px;                /* 列间距 */
+}
+
+/* 左右列都应该占据相同的宽度 */
+.activity-section {
+    flex: 1;                  /* 使左右两列平分宽度 */
+    margin-bottom: 0;         /* 取消默认的底部间距 */
+}
+
+/* 左右列的标题样式 */
+.activity-section h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #343a40;
+}
+
+/* 活动卡片样式复用 */
+.activity-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+/* 参加活动和举办活动卡片内的内容保持一致 */
+.activity-card h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.activity-details p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.activity-status {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.activity-description {
+    margin-top: 10px;
+    font-style: italic;
+    color: #6c757d;
+}
+
+
+/* 参加活动列表 */
+.participants-list {
+    margin-top: 10px;
+}
+
+.participants-list p {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.participants-list ul {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.participants-list li {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.join-button, .create-activity-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.join-button:hover, .create-activity-button:hover {
+    background-color: #0056b3;
+}
+
+.join-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.dropout-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .dropout-button:hover {
+    background-color: #c82333;
+  }
+  
+  .dropout-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  /* 取消活动按钮 */
+  .cancel-button {
+    background-color: #ffc107;
+    color: black;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .cancel-button:hover {
+    background-color: #e0a800;
+  }
+  
+  .cancel-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }

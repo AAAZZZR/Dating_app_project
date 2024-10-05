@@ -1,0 +1,126 @@
+/* 整个聊天窗口的样式 */
+.chat-window {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 320px; /* 略宽一点 */
+    height: 450px; /* 提高高度 */
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 更大的阴影 */
+    border-radius: 10px; /* 添加圆角 */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 防止内容溢出 */
+}
+
+/* 聊天窗口的头部样式 */
+.chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    border-radius: 10px 10px 0 0;
+    font-size: 1.1em; /* 稍微加大字体 */
+}
+
+/* 聊天主体内容的样式 */
+.chat-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #f9f9f9; /* 淡灰背景 */
+}
+
+/* 聊天消息的样式 */
+.chat-message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    max-width: 80%;
+}
+
+.chat-message.left {
+    justify-content: flex-start;
+}
+
+.chat-message.right {
+    justify-content: flex-end;
+    flex-direction: row-reverse; /* 自己的消息和圆圈从右到左排列 */
+}
+
+/* 用户名圆圈样式 */
+.chat-message .username-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #007bff;
+    color: white;
+    font-size: 0.85em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* 圆形 */
+    margin-right: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.chat-message.right .username-circle {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+/* 消息内容的样式 */
+.chat-message .message-content {
+    padding: 8px 12px;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    flex-grow: 1;
+    position: relative;
+}
+
+.chat-message.right .message-content {
+    background-color: #d1e7dd; /* 改成淡绿色背景 */
+}
+
+/* 消息中的时间戳样式 */
+.chat-message .message-content em {
+    font-size: 0.75em;
+    color: #888;
+    display: block;
+    margin-top: 4px;
+    text-align: right;
+}
+
+/* 底部输入区域的样式 */
+.chat-footer {
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    display: flex;
+    gap: 10px;
+}
+
+.chat-footer input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.chat-footer button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chat-footer button:hover {
+    background-color: #0056b3;
+}

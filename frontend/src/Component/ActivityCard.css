@@ -1,0 +1,113 @@
+
+
+.activity-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.activity-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.activity-details p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.activity-status {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.activity-description {
+    margin-top: 10px;
+    font-style: italic;
+    color: #6c757d;
+}
+
+.participants-list {
+    margin-top: 10px;
+}
+
+.participants-list p {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.participants-list ul {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.participants-list li {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.join-button, .create-activity-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.join-button:hover, .create-activity-button:hover {
+    background-color: #0056b3;
+}
+
+.join-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.dropout-button {
+    background-color: #dc3545; /* 红色，表示危险或警告 */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.dropout-button:hover {
+    background-color: #c82333; /* 更深的红色 */
+}
+
+.dropout-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.activity-card {
+    /* 其他样式保持不变 */
+}
+
+.chat-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.chat-button:hover {
+    background-color: #218838;
+}

@@ -1,0 +1,130 @@
+/* App.css */
+
+/* 整个应用容器 */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7; /* 应用背景色 */
+  font-family: 'Arial', sans-serif;
+}
+
+/* 导航栏样式 */
+.navbar {
+  background-color: #35495e; /* 深色背景 */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+  
+}
+
+/* 导航列表 */
+.nav-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 每个导航项 */
+.nav-item {
+  margin-right: 20px;
+}
+
+/* 链接样式 */
+.nav-item a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-item a:hover {
+  background-color: #42b983; /* 悬停时背景颜色 */
+  color: white;
+}
+.no-hover:hover {
+  background-color: transparent; /* 移除背景色变化 */
+  color: inherit; /* 保持原有文字颜色 */
+  cursor: default; /* 更改为默认鼠标样式 */
+}
+
+/* 头像样式 */
+.user-avatar {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%; /* 确保头像是圆形 */
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0;
+}
+.avatar-link {
+  display: inline-block;
+  border-radius: 50%; /* 确保链接保持圆形 */
+  padding: 5px; /* 添加内边距以防背景颜色直接靠近头像 */
+  transition: background-color 0.3s ease;
+}
+.avatar-link:hover {
+  background-color: rgba(101, 149, 84, 0.3); 
+  border-radius: 50%; 
+}
+
+/* 注销按钮样式 */
+.logout-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+
+/* 内容区样式 */
+.content {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/* 首页按钮样式 */
+.cta-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #42b983;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #35495e;
+}
+
+/* 其他页面的文本样式 */
+.welcome-message {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #333;
+}

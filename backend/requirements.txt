@@ -1,0 +1,12 @@
+flask
+flask-sqlalchemy
+flask-bcrypt
+python-dotenv
+flask-session
+flask_cors
+flask-migrate
+redis
+flask-socketio
+pymongo
+redis
+eventlet

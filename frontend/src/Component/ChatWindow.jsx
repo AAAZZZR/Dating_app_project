@@ -10,7 +10,7 @@ const ChatWindow = ({ activity, closeChat,currentUser}) => {
     const [inputMessage, setInputMessage] = useState('');
     
     useEffect(() => {
-        const newSocket = io('http://localhost:5000',{
+        const newSocket = io('http://localhost:5001',{
             transports: ['websocket', 'polling'],
             withCredentials: true});
         setSocket(newSocket);

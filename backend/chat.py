@@ -1,13 +1,21 @@
 # chat.py
+import eventlet
+eventlet.monkey_patch()
 from flask_socketio import SocketIO, join_room, leave_room, emit
 from flask import request
 from pymongo import MongoClient
 from utils import get_user
 from datetime import datetime   
+from model import db
 
-socketio = SocketIO()
+from flask import Flask
+from flask_socketio import SocketIO
 
-# 初始化 MongoDB 客户端
+app = Flask(__name__)
+app.config.from_object('config.ApplicationConfig')
+db.init_app(app)
+socketio = SocketIO(app, cors_allowed_origins="*", message_queue='redis://localhost:6379')
+
 mongo_client = MongoClient('mongodb://localhost:27017/')
 db_mongo = mongo_client['chat_app'] 
 messages_collection = db_mongo['messages'] 
@@ -15,6 +23,8 @@ messages_collection = db_mongo['messages']
 @socketio.on('join')
 def handle_join(data):
     user = get_user()
+    
+    print(user)
     if not user:
         emit('error', {'message': 'Unauthorized'}, room=request.sid)
         return
@@ -28,7 +38,7 @@ def handle_join(data):
     join_room(room)
     emit('status', {'message': f'{user.username} has joined the room.'}, room=room)
 
-    # 发送最近的聊天历史记录给用户
+    
     recent_messages = messages_collection.find({'activity_id': activity_id}).sort('timestamp', -1).limit(50)
     messages = []
     for msg in reversed(list(recent_messages)):
@@ -44,14 +54,14 @@ def handle_join(data):
 def handle_send_message(data):
 
     user = get_user()
-    
+    print("user",user)
     if not user:
         emit('error', {'message': 'Unauthorized'}, room=request.sid)
         return
 
     activity_id = data.get('activity_id')
     message_text = data.get('message')
-    
+    print('Received message:', message_text)
     if not activity_id or not message_text:
         emit('error', {'message': 'Invalid data'}, room=request.sid)
         return
@@ -91,3 +101,6 @@ def handle_leave(data):
     room = f'activity_{activity_id}'
     leave_room(room)
     emit('status', {'message': f'{user.username} has left the room.'}, room=room)
+    
+if __name__ == '__main__':
+    socketio.run(app, debug=True, host='0.0.0.0', port=5001)

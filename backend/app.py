@@ -8,7 +8,7 @@ from flask_session import Session
 from flask_cors import CORS, cross_origin
 from model import db, User, Activity
 from flask_migrate import Migrate
-
+from flask_socketio import SocketIO
 from datetime import datetime
 from functools import wraps
 
@@ -273,3 +273,4 @@ def logout_user():
 socketio.init_app(app, cors_allowed_origins="*", message_queue='redis://localhost:6379')
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0', port=5000)
+    

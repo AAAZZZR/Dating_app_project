@@ -51,6 +51,7 @@ const Activities = () => {
             // Refresh the activities list
             const updatedActivities = await axios.get('http://localhost:5000/activities');
             setActivities(updatedActivities.data);
+           
             const updatedUser = await axios.get('http://localhost:5000/@me', { withCredentials: true });
         } catch (error) {
           console.error("Failed to create activity:", error.response ? error.response.data : error);

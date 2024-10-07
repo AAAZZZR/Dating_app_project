@@ -113,10 +113,11 @@ const UserPage = () => {
 
 
     const sortedActivities = activities.sort((a, b) => {
-      if (a.status === 'cancelled' && b.status !== 'cancelled') return 1;
-      if (a.status !== 'cancelled' && b.status === 'cancelled') return -1;
-      return 0;
+      const order = { upcoming: 1, completed: 2, cancelled: 3 };
+    
+      return order[a.status] - order[b.status];
     });
+    
 
     return (
       <ul>
@@ -130,7 +131,7 @@ const UserPage = () => {
               <p className="activity-description">📝 {activity.description || 'No description available'}</p>
               <p className="activity-status">🏷️ Status: {activity.status || 'Unknown'}</p>
             </div>
-            {/* 根据活动类型显示不同的按钮 */}
+           
             {activityType === 'hosted' && (
               <>
                 <button
@@ -141,7 +142,7 @@ const UserPage = () => {
                   {activity.status === 'cancelled' ? 'Cancelled' : 'Cancel Activity'}
                 </button>
 
-                {/* 仅当活动未取消时显示 "Open Chat" 按钮 */}
+                
                 {activity.status !== 'cancelled' && (
                   <button
                     onClick={() => openChatWindow(activity)}

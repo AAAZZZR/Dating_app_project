@@ -4,6 +4,7 @@ from model import User, Activity
 def get_user():
 
     user_id = session.get("user_id")
+    print("session",session)
     if not user_id:
         return jsonify({"error": "Unauthorized"}), 401
     user = User.query.filter_by(id=user_id).first()

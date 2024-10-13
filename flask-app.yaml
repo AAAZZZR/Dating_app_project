@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-container
+        image: your-flask-app-image:latest  # Build locally and push to container registry
+        env:
+        - name: MY_SECRET_KEY
+          value: "asdvasbasd"
+        - name: DEPLOY_DATABASE_URL
+          value: "postgresql+psycopg2://myuser:mypassword@db:5432/mydb"
+        ports:
+        - containerPort: 5000
+        - containerPort: 5001
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+        volumeMounts:
+        - mountPath: /usr/src/app
+          name: flask-volume
+      volumes:
+      - name: flask-volume
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: flask-app
+  ports:
+    - port: 80
+      targetPort: 5000

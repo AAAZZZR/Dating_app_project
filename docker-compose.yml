@@ -1,26 +1,24 @@
-version: '3'
 services:
   flask-app:
-    build: .
-    container_name: flask-app
+    build:
+      context: ./backend  
+      dockerfile: Dockerfile  
     ports:
-      - "5000:5000"
+      - "5000:5000"  # Exposes app.py on port 5000
+      - "5001:5001"  # Exposes chat.py on port 5001
     depends_on:
-      - db
-      - redis
+      - db    # For app.py
+      - mongodb  # For chat.py
+      - redis  # For chat.py
+    environment:
+      MY_SECRET_KEY: asdvasbasd
+      DEPLOY_DATABASE_URL: postgresql+psycopg2://myuser:mypassword@db:5432/mydb
     networks:
+
       - app-network
-    deploy:
-      replicas: 3
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-    
+
   db:
     image: bitnami/postgresql:16.4.0
-    container_name: postgres-db
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
@@ -34,7 +32,6 @@ services:
 
   mongodb:
     image: mongo
-    container_name: mongo-db
     ports:
       - "27017:27017"
     networks:
@@ -44,7 +41,6 @@ services:
 
   redis:
     image: redis:alpine
-    container_name: redis
     ports:
       - "6379:6379"
     networks:
@@ -53,7 +49,6 @@ services:
       - redis_data:/data  
 
   react-app:
-    container_name: react-app
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -61,17 +56,12 @@ services:
       - "3000:3000"
     networks:
       - app-network
-    deploy:
-      replicas: 2
-      update_config:
-        parallelism: 1
-        delay: 5s
-      restart_policy:
-        condition: on-failure
+    depends_on:
+      - flask-app  # React waits for the Flask app to be ready
 
 networks:
   app-network:
-    driver: overlay
+    driver: bridge  
 
 volumes:
   db_data:  

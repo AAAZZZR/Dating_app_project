@@ -1,4 +1,3 @@
-# chat.py
 import eventlet
 eventlet.monkey_patch()
 from flask_socketio import SocketIO, join_room, leave_room, emit
@@ -14,9 +13,9 @@ from flask_socketio import SocketIO
 app = Flask(__name__)
 app.config.from_object('config.ApplicationConfig')
 db.init_app(app)
-socketio = SocketIO(app, cors_allowed_origins="*", message_queue='redis://localhost:6379')
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet", message_queue='redis://redis:6379')
 
-mongo_client = MongoClient('mongodb://localhost:27017/')
+mongo_client = MongoClient('mongodb://mongodb:27017/')
 db_mongo = mongo_client['chat_app'] 
 messages_collection = db_mongo['messages'] 
 
@@ -68,7 +67,7 @@ def handle_send_message(data):
 
     room = f'activity_{activity_id}'
     
-    # 保存消息到 MongoDB
+    
     message = {
         'activity_id': activity_id,
         'user_id': user.id,

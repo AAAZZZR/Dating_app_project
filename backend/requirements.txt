@@ -10,3 +10,4 @@ flask-socketio
 pymongo
 redis
 eventlet
+psycopg2-binary==2.9.7

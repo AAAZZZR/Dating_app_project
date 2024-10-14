@@ -9,36 +9,24 @@ User can create activities, post it on website and let people join your activity
 - mongoDB (chat)
 - redis (real time chat)
 ### Flow
-                              +---------------------+
-                              |     User Request     |
-                              | (Browser or Client)  |
-                              +---------------------+
-                                       |
-                         +-----------------------------+
-                         |            NGINX             |
-                         |  (Reverse Proxy, Ports 80/443)|
-                         +-----------------------------+
-                          /                    \
-          Frontend Requests                  Backend Requests (/api/)
-                 |                                    |
-   +---------------------------+         +-------------------------------+
-   |      React Application     |         |       Flask Application       |
-   |   (Frontend on Port 3000)  |         |     (Backend on Ports 5000,   |
-   +---------------------------+         |       5001 for chat.py)       |
-            |                            +-------------------------------+
-            |                                    /       \
-   Static Content                     +-----------------+   +-----------------+
-      (HTML/CSS/JS)                   |    PostgreSQL   |   |     MongoDB      |
-                                      | (Port 5432)     |   |  (Port 27017)    |
-                                      +-----------------+   +-----------------+
-                                               |                     |
-                                       Relational Data          Chat Messages
-                                             (app.py)               (chat.py)
+``` mermaid
+graph TD;
+    UserRequest["User Request (Browser or Client)"] --> NGINX["NGINX (Reverse Proxy, Ports 80/443)"];
+    
+    NGINX --> ReactApp["React Application (Port 3000)"];
+    NGINX --> FlaskApp1["Flask Application (app.py on Port 5000)"];
+    NGINX --> FlaskApp2["Flask Application (chat.py on Port 5001)"];
 
-                              +-----------------------------+
-                              |            Redis             |
-                              |    (Message Queue, Port 6379)|
-                              +-----------------------------+
-                                   (Enables Real-time Chat)
+    FlaskApp1 --> PostgreSQL["PostgreSQL (Port 5432)"];
+    FlaskApp2 --> MongoDB["MongoDB (Port 27017)"];
+    FlaskApp2 --> Redis["Redis (Port 6379)"];
+
+    PostgreSQL --> RelationalData["Relational Data"];
+    MongoDB --> ChatMessages["Chat Messages"];
+    Redis --> RealTimeQueue["Real-time Message Queue"];
+
+    ReactApp --> StaticContent["Static Content (HTML/CSS/JS)"];
+```
+
 
 

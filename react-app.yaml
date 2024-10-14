@@ -13,19 +13,7 @@ spec:
         app: react-app
     spec:
       containers:
-      - name: react-container
-        image: your-react-app-image:latest  # Build and push to container registry
-        ports:
-        - containerPort: 3000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: react-service
-spec:
-  type: LoadBalancer
-  selector:
-    app: react-app
-  ports:
-    - port: 80
-      targetPort: 3000
+        - name: react-container
+          image: gcr.io/alien-hour-431301-a4/react-app:latest
+          ports:
+            - containerPort: 3000

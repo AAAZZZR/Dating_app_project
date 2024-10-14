@@ -9,14 +9,11 @@ User can create activities, post it on website and let people join your activity
 - mongoDB (chat)
 - redis (real time chat)
 ### Flow
-
-
                               +---------------------+
                               |     User Request     |
                               | (Browser or Client)  |
                               +---------------------+
                                        |
-                                       v
                          +-----------------------------+
                          |            NGINX             |
                          |  (Reverse Proxy, Ports 80/443)|
@@ -43,4 +40,5 @@ User can create activities, post it on website and let people join your activity
                               |    (Message Queue, Port 6379)|
                               +-----------------------------+
                                    (Enables Real-time Chat)
+
 

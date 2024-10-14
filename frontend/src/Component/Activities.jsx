@@ -12,7 +12,7 @@ const Activities = () => {
     const [participatedActivityIds, setParticipatedActivityIds] = useState([]);
     const checkAuthStatus = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/@me', { withCredentials: true });
+            const response = await axios.get('/api/@me', { withCredentials: true });
             setIsLoggedIn(true);
             setUser(response.data);
             const participatedActivityIds = response.data.participated_activities.map(activity => activity.id);
@@ -26,7 +26,7 @@ const Activities = () => {
 
     const fetchActivities = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/activities');
+            const response = await axios.get('/api/activities');
             setActivities(response.data);
         } catch (error) {
             console.error("Failed to fetch activities:", error);
@@ -40,7 +40,7 @@ const Activities = () => {
 
     const handleCreateActivity = async (activityData) => {
         try {
-            const response = await axios.post('http://localhost:5000/create_activity', 
+            const response = await axios.post('/api/create_activity', 
                 { ...activityData, 
                   max_participants: parseInt(activityData.max_participants, 10),
                    },
@@ -49,10 +49,10 @@ const Activities = () => {
             console.log("Activity created:", response.data);
             setShowCreateForm(false);
             // Refresh the activities list
-            const updatedActivities = await axios.get('http://localhost:5000/activities');
+            const updatedActivities = await axios.get('/api/activities');
             setActivities(updatedActivities.data);
            
-            const updatedUser = await axios.get('http://localhost:5000/@me', { withCredentials: true });
+            const updatedUser = await axios.get('/api/@me', { withCredentials: true });
         } catch (error) {
           console.error("Failed to create activity:", error.response ? error.response.data : error);
           alert("Failed to create activity. Please check the console for details.");
@@ -61,7 +61,7 @@ const Activities = () => {
 
     const handleJoinActivity = async (activityId) => {
         try {
-            const response = await axios.post(`http://localhost:5000/join_activity/${activityId}`, {}, { withCredentials: true });
+            const response = await axios.post(`/api/join_activity/${activityId}`, {}, { withCredentials: true });
             if (response.status === 200) {
                 
                 setParticipatedActivityIds(prevIds => [...prevIds, activityId]);
@@ -88,7 +88,7 @@ const Activities = () => {
     };
     const handleDropOut = async (activityId) => {
         try {
-            const response = await axios.post(`http://localhost:5000/dropout_activity/${activityId}`, {}, { withCredentials: true });
+            const response = await axios.post(`/api/dropout_activity/${activityId}`, {}, { withCredentials: true });
     
             if (response.status === 200) {
                 

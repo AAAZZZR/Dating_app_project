@@ -14,7 +14,7 @@ const RegisterPage = () => {
     setMessage('');
     setIsError(false);
     try {
-      const response = await axios.post('http://localhost:5000/register', { email, password, username }, { withCredentials: true });
+      const response = await axios.post('/api/register', { email, password, username }, { withCredentials: true });
       console.log('Registration successful', response.data);
       setMessage('Registration successful! You can now log in.');
       setEmail('');

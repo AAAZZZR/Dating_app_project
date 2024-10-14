@@ -46,7 +46,7 @@ const UserPage = () => {
 
   const handleDropOutActivity = async (activityId) => {
     try {
-      const response = await axios.post(`http://localhost:5000/dropout_activity/${activityId}`, {}, { withCredentials: true });
+      const response = await axios.post(`/api/dropout_activity/${activityId}`, {}, { withCredentials: true });
       if (response.status === 200) {
         alert('Successfully dropped out of the activity');
         await fetchUserData();
@@ -61,7 +61,7 @@ const UserPage = () => {
 
   const handleCancelActivity = async (activityId) => {
     try {
-      const response = await axios.post(`http://localhost:5000/cancel_activity/${activityId}`, {}, { withCredentials: true });
+      const response = await axios.post(`/api/cancel_activity/${activityId}`, {}, { withCredentials: true });
       if (response.status === 200) {
         alert('Activity has been cancelled');
         await fetchUserData();
@@ -76,11 +76,11 @@ const UserPage = () => {
 
   const openChatWindow = (activity) => {
     setSelectedActivity(activity);
-    setShowChat(true); // 显示聊天窗口
+    setShowChat(true); 
   };
 
   const closeChatWindow = () => {
-    setShowChat(false); // 关闭聊天窗口
+    setShowChat(false); 
   };
 
   if (loading) {
@@ -164,7 +164,7 @@ const UserPage = () => {
                   Drop Out
                 </button>
                 <button
-                  onClick={() => openChatWindow(activity)} // 点击打开聊天窗口
+                  onClick={() => openChatWindow(activity)} 
                   className="chat-button"
                 >
                   Open Chat

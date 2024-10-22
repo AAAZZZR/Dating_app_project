@@ -1,0 +1,85 @@
+version: '3.8'
+services:
+  flask-app:
+    image: bighammeraaazzz/myapp-backend
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    environment:
+      MY_SECRET_KEY: asdvasbasd
+      DEPLOY_DATABASE_URL: postgresql+psycopg2://myuser:mypassword@db:5432/mydb
+    networks:
+      - app-network
+
+  db:
+    image: bitnami/postgresql:16.4.0
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  mongodb:
+    image: mongo
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:alpine
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+    volumes:
+      - redis_data:/data
+
+  nginx:
+    image: bighammeraaazzz/myapp_nginx
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: overlay
+
+volumes:
+  db_data:
+    driver: local
+  mongo_data:
+    driver: local
+  redis_data:
+    driver: local

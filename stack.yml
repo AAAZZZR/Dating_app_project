@@ -4,11 +4,18 @@ services:
     image: bighammeraaazzz/myapp-backend
     deploy:
       replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
       restart_policy:
         condition: on-failure
     ports:
-      - "5000:5000"
-      - "5001:5001"
+      - target: 5000
+        published: 5000
+        mode: host
+      - target: 5001
+        published: 5001
+        mode: host
     environment:
       MY_SECRET_KEY: asdvasbasd
       DEPLOY_DATABASE_URL: postgresql+psycopg2://myuser:mypassword@db:5432/mydb
@@ -65,8 +72,12 @@ services:
     image: bighammeraaazzz/myapp_nginx
     deploy:
       replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
     ports:
       - "80:80"
     networks:
@@ -75,11 +86,9 @@ services:
 networks:
   app-network:
     driver: overlay
+    attachable: true
 
 volumes:
   db_data:
-    driver: local
   mongo_data:
-    driver: local
   redis_data:
-    driver: local

@@ -13,7 +13,7 @@ from flask_socketio import SocketIO
 app = Flask(__name__)
 app.config.from_object('config.ApplicationConfig')
 db.init_app(app)
-socketio = SocketIO(app, cors_allowed_origins=["http://localhost"], async_mode="eventlet", message_queue='redis://redis:6379')
+socketio = SocketIO(app, cors_allowed_origins=["*"], async_mode="eventlet", message_queue='redis://redis:6379')
 
 mongo_client = MongoClient('mongodb://mongodb:27017/')
 db_mongo = mongo_client['chat_app'] 

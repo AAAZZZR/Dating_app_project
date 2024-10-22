@@ -36,7 +36,7 @@ def handle_join(data):
     room = f'activity_{activity_id}'
     join_room(room)
     emit('status', {'message': f'{user.username} has joined the room.'}, room=room)
-
+    
     
     recent_messages = messages_collection.find({'activity_id': activity_id}).sort('timestamp', -1).limit(50)
     messages = []

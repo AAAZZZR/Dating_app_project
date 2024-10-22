@@ -285,7 +285,7 @@ def logout_user():
     session.pop("user_id")
     return "200"
 
-socketio.init_app(app, cors_allowed_origins="*", message_queue='redis://localhost:6379')
+socketio.init_app(app, cors_allowed_origins='http://localhost', message_queue='redis://localhost:6379')
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0', port=5000)
     

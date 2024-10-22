@@ -12,10 +12,10 @@ services:
     ports:
       - target: 5000
         published: 5000
-        mode: host
+        
       - target: 5001
         published: 5001
-        mode: host
+        
     environment:
       MY_SECRET_KEY: asdvasbasd
       DEPLOY_DATABASE_URL: postgresql+psycopg2://myuser:mypassword@db:5432/mydb

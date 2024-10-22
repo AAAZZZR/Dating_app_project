@@ -18,7 +18,7 @@ services:
         
     environment:
       MY_SECRET_KEY: asdvasbasd
-      DEPLOY_DATABASE_URL: postgresql+psycopg2://myuser:mypassword@db:5432/mydb
+      DEPLOY_DATABASE_URL: postgresql+psycopg2://myuser:mypassword@myapp_db:5432/mydb
     networks:
       - app-network
 

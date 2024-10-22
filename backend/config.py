@@ -27,7 +27,7 @@ class ApplicationConfig:
     # Use DATABASE_URL from the environment, fallback to Docker connection if not set
     SQLALCHEMY_DATABASE_URI = os.getenv(
         'DEPLOY_DATABASE_URL',
-        'postgresql+psycopg2://myuser:mypassword@db:5432/mydb'  # Default for Docker
+        'postgresql+psycopg2://myuser:mypassword@myapp_db:5432/mydb'  # Default for Docker
     )
 
     SESSION_TYPE = "sqlalchemy"

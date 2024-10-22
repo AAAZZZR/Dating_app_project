@@ -98,8 +98,8 @@ const App = () => {
 
 const Home = () => (
   <div>
-    <h1>Dating App123</h1>
-    <p className="welcome-message">Meet new friends now OKOK</p>
+    <h1>Dating App</h1>
+    <p className="welcome-message">Meet new friends now</p>
     <Link to="/register" className="cta-button">Register here</Link>
   </div>
 );

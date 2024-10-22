@@ -15,7 +15,7 @@ const UserPage = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/@me', { withCredentials: true });
+      const response = await axios.get('/api/@me', { withCredentials: true });
       setUser(response.data);
       console.log('User data:', response.data);
       setLoading(false);

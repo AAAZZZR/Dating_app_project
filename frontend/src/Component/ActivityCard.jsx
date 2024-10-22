@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import "./ActivityCard.css";
-import ChatWindow from './ChatWindow'; // 引入聊天窗口组件
+import ChatWindow from './ChatWindow'; 
 
 const ActivityCard = ({ activity, onJoin, isLoggedIn, onDropOut, isParticipant,currentUser}) => {
-    // 用于控制聊天窗口的显示状态
+    
     const [showChat, setShowChat] = useState(false);
     
-    // 切换聊天窗口的显示和隐藏
+    
     const toggleChatWindow = () => {
         setShowChat(!showChat);
     };
@@ -46,7 +46,7 @@ const ActivityCard = ({ activity, onJoin, isLoggedIn, onDropOut, isParticipant,c
 
                     {isParticipant && (
                         <button
-                            onClick={toggleChatWindow} // 打开聊天窗口
+                            onClick={toggleChatWindow} 
                             className="chat-button"
                         >
                             {showChat ? 'Close Chat' : 'Join Chat'}

@@ -15,13 +15,13 @@ const App = () => {
   const navigate = useNavigate();
 
   const handleLoginSuccess = (userData) => {
-    setUser(userData);  // 更新 user 状态
+    setUser(userData);  
   };
 
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/@me', { withCredentials: true });
+        const response = await axios.get('/api/@me', { withCredentials: true });
         setUser(response.data);
       } catch (error) {
         console.error('Auth check failed', error);
@@ -36,7 +36,7 @@ const App = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:5000/logout', {}, { withCredentials: true });
+      await axios.post('/api/logout', {}, { withCredentials: true });
       setUser(null);
       navigate('/login'); 
     } catch (error) {
@@ -98,8 +98,8 @@ const App = () => {
 
 const Home = () => (
   <div>
-    <h1>Dating App</h1>
-    <p className="welcome-message">Meet new friends now</p>
+    <h1>Dating App123</h1>
+    <p className="welcome-message">Meet new friends now OKOK</p>
     <Link to="/register" className="cta-button">Register here</Link>
   </div>
 );

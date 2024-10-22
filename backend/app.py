@@ -17,7 +17,7 @@ from utils import get_user
 app = Flask(__name__)
 app.config.from_object('config.ApplicationConfig')
 bcrypt = Bcrypt(app)
-CORS(app, supports_credentials=True)
+CORS(app, supports_credentials=True,origins=['http://localhost'])
 # server_session = Session(app)
 
 
@@ -28,9 +28,12 @@ with app.app_context():
     db.create_all()
         
 
-@app.route("/@me")
+@app.route("/api/@me")
 def get_current_user():
-    user = get_user()
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify({"error": "Unauthorized"}), 401
+    user = User.query.filter_by(id=user_id).first()
     
     hosted_activities = [{
                 "id": activity.id,
@@ -62,7 +65,7 @@ def get_current_user():
     }) 
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/api/register', methods=['POST'])
 def register():
     try:
         username = request.json["username"]
@@ -92,7 +95,7 @@ def register():
         print(f"fail: {str(e)}")
         return jsonify({"error": "fail", "details": str(e)}), 500
 
-@app.route("/login", methods=["POST"])
+@app.route("/api/login", methods=["POST"])
 def login_user():
     
     email = request.json["email"]
@@ -114,7 +117,7 @@ def login_user():
         "username": user.username   
     })
     
-@app.route('/create_activity', methods=['POST'])
+@app.route('/api/create_activity', methods=['POST'])
 def create_activity():
     # current_user_response = get_current_user()
     # if isinstance(current_user_response, tuple):  
@@ -122,7 +125,10 @@ def create_activity():
 
     # current_user = current_user_response.json  
     
-    user = get_user()
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify({"error": "Unauthorized"}), 401
+    user = User.query.filter_by(id=user_id).first()
     data = request.json
     
     
@@ -163,9 +169,12 @@ def create_activity():
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
-@app.route('/cancel_activity/<activity_id>', methods=['POST'])
+@app.route('/api/cancel_activity/<activity_id>', methods=['POST'])
 def cancel_activity(activity_id):
-    user = get_user()
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify({"error": "Unauthorized"}), 401
+    user = User.query.filter_by(id=user_id).first()
     
     if not user:
         return jsonify({"error": "User not found"}), 404
@@ -183,7 +192,7 @@ def cancel_activity(activity_id):
 
     return jsonify({"message": "Activity has been cancelled"}), 200
 
-@app.route('/activities', methods=['GET'])
+@app.route('/api/activities', methods=['GET'])
 def get_activities():
     activities = Activity.query.filter_by(status='upcoming').all()
     current_time = datetime.now()
@@ -212,9 +221,12 @@ def get_activities():
         'participants': [user.username for user in activity.participants]
     } for activity in activities]), 200
 
-@app.route('/join_activity/<activity_id>', methods=['POST'])
+@app.route('/api/join_activity/<activity_id>', methods=['POST'])
 def join_activity(activity_id):
-    user = get_user()
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify({"error": "Unauthorized"}), 401
+    user = User.query.filter_by(id=user_id).first()
     
     if not user:
         return jsonify({"error": "User not found"}), 404
@@ -228,24 +240,28 @@ def join_activity(activity_id):
     
     if activity.status != 'upcoming':
         return jsonify({"error": "Activity is not available for joining"}), 400
-    # 檢查用戶是否已經參加該活動
+    
     if user in activity.participants:
         return jsonify({"error": "You have already joined this activity"}), 400
 
     if user == activity.hoster:
         return jsonify({"error": "You are the host of this activity"}), 400
-    # 添加用戶到活動的 participants 列表
+    
     activity.participants.append(user)
     activity.current_participants += 1
 
-    # 提交變更到數據庫
+    
     db.session.commit()
 
     return jsonify({"message": "Successfully joined the activity"}), 200
 
-@app.route('/dropout_activity/<activity_id>', methods=['POST'])
+@app.route('/api/dropout_activity/<activity_id>', methods=['POST'])
 def dropout_activity(activity_id):
-    user = get_user()
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify({"error": "Unauthorized"}), 401
+    user = User.query.filter_by(id=user_id).first()
+    
     if not user:
         return jsonify({"error": "User not found"}), 404
 
@@ -264,7 +280,7 @@ def dropout_activity(activity_id):
 
     return jsonify({"message": "Successfully dropped out of the activity"}), 200
 
-@app.route('/logout', methods=['POST'])
+@app.route('/api/logout', methods=['POST'])
 def logout_user():
     session.pop("user_id")
     return "200"

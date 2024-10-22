@@ -18,7 +18,7 @@ const LoginPage = ({onLoginSuccess }) => {
       const response = await axios.post('/api/login', { email, password }, { withCredentials: true });
       console.log('Login successful', response.data);
       setMessage('Login successful!');
-      // 登入成功後的處理，例如重定向到用戶頁面
+      
       onLoginSuccess(response.data);
       navigate('/user');
       

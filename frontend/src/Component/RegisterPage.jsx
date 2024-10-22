@@ -8,7 +8,6 @@ const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [message, setMessage] = useState('');
   const [isError, setIsError] = useState(false);
-
   const handleRegister = async (e) => {
     e.preventDefault();
     setMessage('');

@@ -68,3 +68,24 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+FROM node:18 AS build
+
+WORKDIR /frontend
+
+COPY package.json ./
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+# # Remove the development server command
+# CMD ["npm", "start"]
+
+FROM nginx:alpine
+COPY --from=build /frontend/build /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

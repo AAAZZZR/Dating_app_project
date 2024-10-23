@@ -69,7 +69,7 @@ services:
       - redis_data:/data
 
   nginx:
-    image: bighammeraaazzz/myapp_nginx
+    image: bighammeraaazzz/myapp_nginx:swarm
     deploy:
       replicas: 2
       update_config:

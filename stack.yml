@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   flask-app:
-    image: bighammeraaazzz/myapp-backend
+    image: bighammeraaazzz/myapp-backend:swarm
     deploy:
       replicas: 2
       update_config:
